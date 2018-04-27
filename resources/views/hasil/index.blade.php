@@ -34,5 +34,15 @@
         <div class="text-center">
 
         </div>
+
+        <div class="box box-primary">
+            <div class="box-body">
+                Uji Konsistensi
+                @include('hasil.ujiKonsistensi')
+            </div>
+        </div>
+        <div class="text-center">
+
+        </div>
     </div>
 @endsection

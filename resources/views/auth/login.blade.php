@@ -86,7 +86,7 @@
 
     </div>
     <br>
-    <p class="login-box-msg"><span class="glyphicon glyphicon-copyright-mark"></span> <b>1511521016 - Vedo Alfarizi</b> (Kelompok 1)</p>
+    <p class="login-box-msg"><span class="glyphicon glyphicon-copyright-mark"></span> <b>Kelompok 1</b></p>
     <p class="login-box-msg">Sistem Informasi<br>Fakultas Teknologi Informasi<br>Universitas Andalas<br>2018</p>
     <!-- /.login-box-body -->
 </div>

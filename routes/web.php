@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('home');
+        return redirect(route('home'));
     }
     return view('auth.login');
 });
@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('alternatifs', 'AlternatifController');
 

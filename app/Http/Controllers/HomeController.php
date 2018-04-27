@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alternatif;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $nKriteria = Kriteria::all()->count();
+        $nAlternatif = Alternatif::all()->count();
+
+        $terbaik = Alternatif::orderBy('nilai_akhir', 'desc')->first();
+
+        return view('home', compact('nKriteria', 'nAlternatif', 'terbaik'));
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Alternatif;
 use App\Models\Kriteria;
 use App\Models\NilaiAlternatifKriteria;
 
+use App\Models\NilaiKriteria;
 use Illuminate\Http\Request;
 
 class HasilController extends Controller
@@ -77,6 +78,53 @@ class HasilController extends Controller
 
         $hasilAHP = Alternatif::orderBy('nilai_akhir', 'desc')->get();
 
-        return view('hasil.index', compact('matriksAlt', 'rataKriterias', 'namaAlternatifs', 'hasilAHP'));
+        $kriterias = NilaiKriteria::get(['kriteria_1_id', 'bobot_kriteria']);
+        $matriksBobotKri = [];
+
+        $x = 0;
+        $y = 0;
+        foreach ($kriterias as $kriteria) {
+            if($x < $nKri ){
+                $matriksBobotKri[$y][$x] = $kriteria->bobot_kriteria;
+                $x++;
+            }else{
+                $x = 0;
+                $y++;
+                $matriksBobotKri[$y][$x] = $kriteria->bobot_kriteria;
+                $x++;
+            }
+        }
+
+        $hasilKaliKons = [];
+        for($s=0; $s < $nKri; $s++){
+            for($t=0; $t < $nKri; $t++){
+                if(!isset($hasilKaliKons[$s])){
+                    $hasilKaliKons[$s] = 0 ;
+                }
+                $hasilKaliKons[$s] += $matriksBobotKri[$s][$t] * $matriksKri[$t];
+            }
+        }
+
+        $hasilKons = [];
+        $jumlahKons = 0;
+
+        for($i=0;$i<$nKri;$i++){
+            $hasilKons[$i] = $hasilKaliKons[$i]/$matriksKri[$i];
+            $jumlahKons += $hasilKons[$i];
+        }
+
+        $rataKons = $jumlahKons/$nKri;
+
+        $CI = ($rataKons - $nKri)/($nKri-1);
+
+        if($CI > 0){
+            foreach (config('value.RI') as $key => $value){
+                if($nKri == $key){
+                    $CI = $CI/$value;
+                }
+            }
+        }
+
+        return view('hasil.index', compact('matriksAlt', 'rataKriterias', 'namaAlternatifs', 'hasilAHP', 'CI'));
     }
 }

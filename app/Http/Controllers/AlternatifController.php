@@ -152,4 +152,6 @@ class AlternatifController extends AppBaseController
 
         return redirect(route('alternatifs.index'));
     }
+
+
 }
