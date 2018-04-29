@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22 Apr 2018 pada 23.14
+-- Generation Time: 29 Apr 2018 pada 18.53
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -147,7 +147,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'vedo alfarizi', 'vedoalfarizi@gmail.com', '$2y$10$EmhP8Uowl6rLrYq3y045Pev01SToXpwWkIc7JtOgGIgmZz.pBNHnS', '3AOXP4S4CABZ9ZbgQSWiXdDKPLkwns2SFiAHiOn99V9EsKSHwcesnarfL1qe', '2018-04-08 10:57:05', '2018-04-08 10:57:05');
+(1, 'vedo alfarizi', 'vedoalfarizi@gmail.com', '$2y$10$EmhP8Uowl6rLrYq3y045Pev01SToXpwWkIc7JtOgGIgmZz.pBNHnS', 'WdIlFKaAnszrFuOCrUYWr6yxLSw5r3FAB2HeiqPamc57Ii67pHHbFb3rtpJV', '2018-04-08 10:57:05', '2018-04-08 10:57:05');
 
 --
 -- Indexes for dumped tables
