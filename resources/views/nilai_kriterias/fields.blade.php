@@ -1,20 +1,22 @@
 @foreach($kriterias as $kriteria1)
-    @foreach($kriterias as $kriteria2)
+    <div class="form-group col-sm-6">
+        @foreach($kriterias as $kriteria2)
 
-        <div class="form-group col-sm-3">
-            {!! Form::label('bobot_kriteria', 'Bobot Kriteria:') !!}
+            @if($kriteria1['id'] == $kriteria2['id'])
+                {!! Form::hidden('kriteria_1_id[]', $kriteria1['id'], ['class' => 'form-control']) !!}
+                {!! Form::hidden('kriteria_2_id[]', $kriteria2['id'], ['class' => 'form-control']) !!}
+                {!! Form::hidden('bobot_kriteria[]', 1, ['class' => 'form-control', 'min' => '0', 'step' => '0.0001']) !!}
+            @else
+                {!! Form::hidden('kriteria_1_id[]', $kriteria1['id'], ['class' => 'form-control']) !!}
 
-            {!! Form::label('kriteria_1_id', $kriteria1['nama_kriteria']) !!}
-            {!! Form::hidden('kriteria_1_id[]', $kriteria1['id'], ['class' => 'form-control']) !!}
+                {!! Form::hidden('kriteria_2_id[]', $kriteria2['id'], ['class' => 'form-control']) !!}
 
-            {!! Form::label('keterangan', 'terhadap') !!}
+                {!! Form::number('bobot_kriteria[]', null, ['class' => 'form-control', 'min' => '0', 'step' => '0.0001', 'placeholder' => $kriteria1['nama_kriteria'].' terhadap '.$kriteria2['nama_kriteria'] ]) !!}
 
-            {!! Form::label('kriteria_2_id', $kriteria2['nama_kriteria']) !!}
-            {!! Form::hidden('kriteria_2_id[]', $kriteria2['id'], ['class' => 'form-control']) !!}
+            @endif
 
-            {!! Form::number('bobot_kriteria[]', null, ['class' => 'form-control', 'min' => '0', 'step' => '0.0001']) !!}
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 @endforeach
 
 <!-- Submit Field -->
