@@ -5,6 +5,11 @@
         <h1 class="pull-left">Alternatif</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('alternatifs.create') !!}">Add New</a>
+            @if(!$alternatifs->isEmpty())
+                {!! Form::open(array('action' => 'AlternatifController@hapus')) !!}
+                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger pull-right btn-md', 'onclick' => "return confirm('Anda yakin? Semua Data akan dihapus')"]) !!}
+                {!! Form::close() !!}
+            @endif
         </h1>
     </section>
     <div class="content">

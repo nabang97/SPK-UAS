@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAlternatifRequest;
 use App\Http\Requests\UpdateAlternatifRequest;
+use App\Models\Alternatif;
+use App\Models\NilaiAlternatifKriteria;
+use App\Models\NilaiKriteria;
 use App\Repositories\AlternatifRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class AlternatifController extends AppBaseController
 {
@@ -153,5 +157,25 @@ class AlternatifController extends AppBaseController
         return redirect(route('alternatifs.index'));
     }
 
+    public function hapus()
+    {
+        $alternatif = $this->alternatifRepository->all();
+
+        if (empty($alternatif)) {
+            Flash::error('Alternatif not found');
+
+            return redirect(route('alternatifs.index'));
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Alternatif::truncate();
+        NilaiKriteria::truncate();
+        NilaiAlternatifKriteria::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        Flash::success('Alternatif deleted successfully.');
+
+        return redirect(route('alternatifs.index'));
+    }
 
 }

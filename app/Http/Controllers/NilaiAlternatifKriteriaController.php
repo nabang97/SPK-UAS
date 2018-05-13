@@ -217,4 +217,23 @@ class NilaiAlternatifKriteriaController extends AppBaseController
 
         return redirect(route('nilaiAlternatifKriterias.index'));
     }
+
+    public function hapus()
+    {
+        $nilaiAlternatifKriteria = $this->nilaiAlternatifKriteriaRepository->all();
+
+        if (empty($nilaiAlternatifKriteria)) {
+            Flash::error('Nilai Alternatif Kriteria not found');
+
+            return redirect(route('nilaiAlternatifKriterias.index'));
+        }
+
+        NilaiAlternatifKriteria::truncate();
+        Alternatif::where('nilai_akhir', '!=', NULL)->update(['nilai_akhir' => NULL]);
+
+
+        Flash::success('Nilai Alternatif Kriteria deleted successfully.');
+
+        return redirect(route('nilaiAlternatifKriterias.index'));
+    }
 }

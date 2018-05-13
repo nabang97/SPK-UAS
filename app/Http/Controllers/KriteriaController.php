@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateKriteriaRequest;
 use App\Http\Requests\UpdateKriteriaRequest;
+use App\Models\Kriteria;
+use App\Models\NilaiAlternatifKriteria;
+use App\Models\NilaiKriteria;
 use App\Repositories\KriteriaRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class KriteriaController extends AppBaseController
 {
@@ -147,6 +151,27 @@ class KriteriaController extends AppBaseController
         }
 
         $this->kriteriaRepository->delete($id);
+
+        Flash::success('Kriteria deleted successfully.');
+
+        return redirect(route('kriterias.index'));
+    }
+
+    public function hapus()
+    {
+        $kriteria = $this->kriteriaRepository->all();
+
+        if (empty($kriteria)) {
+            Flash::error('Kriteria not found');
+
+            return redirect(route('kriterias.index'));
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Kriteria::truncate();
+        NilaiKriteria::truncate();
+        NilaiAlternatifKriteria::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         Flash::success('Kriteria deleted successfully.');
 
