@@ -25,6 +25,7 @@ class Kriteria extends Model
 
     public $fillable = [
         'nama_kriteria',
+        'ket',
         'rata_kriteria'
     ];
 

@@ -24,10 +24,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('alternatifs', 'AlternatifController');
+Route::get('alternatifs/create/{id}', 'AlternatifController@createById')->name('alternatifs.createById');
+Route::get('alternatifs/createsub/{id}', 'AlternatifController@createSub')->name('alternatifs.createSub');
 Route::post('alternatifs/hapus', 'AlternatifController@hapus')->name('alternatifs.hapus');
 
 Route::get('kecamatan', 'kecamatanController@create')->name('kecamatans.create');
 Route::post('kecamatan', 'kecamatanController@store')->name('kecamatans.store');
+
+Route::post('detailkecamatan', 'kecamatanController@storeDetail')->name('kecamatans.storeDetail');
 
 Route::resource('kriterias', 'KriteriaController');
 Route::post('kriterias/hapus', 'KriteriaController@hapus')->name('kriterias.hapus');

@@ -25,4 +25,21 @@ class KecamatanController extends Controller
 
         return redirect(route('alternatifs.index'));
     }
+
+    public function storeDetail(Request $request)
+    {
+        $input = $request->all();
+
+        DB::table('detail_kecamatans')->insert(
+            [
+                'kec_id' => $request->kec_id,
+                'nama_kec_pil' => $request->nama
+            ]
+        );
+
+        Flash::success('Sub Kecamatan saved successfully.');
+
+        return redirect(route('alternatifs.index'));
+    }
+
 }

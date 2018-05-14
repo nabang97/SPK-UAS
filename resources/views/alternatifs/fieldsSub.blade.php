@@ -1,7 +1,9 @@
 
+{!! Form::hidden('kec_id',$id , ['class' => 'form-control']) !!}
+
 <div class="form-group col-sm-6">
     {!! Form::label('nama', 'Nama:') !!}
-    {!! Form::select('nama', $pilKecs,null , ['class' => 'form-control']) !!}
+    {!! Form::text('nama',null , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

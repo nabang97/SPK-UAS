@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailKecamatan;
 use App\Http\Requests\CreateAlternatifRequest;
 use App\Http\Requests\UpdateAlternatifRequest;
 use App\Kecamatan;
@@ -52,6 +53,24 @@ class AlternatifController extends AppBaseController
         return view('alternatifs.create', compact('pilihKec'));
     }
 
+    public function createById($id)
+    {
+        $pilKecs = DetailKecamatan::where('kec_id', $id)->pluck('nama_kec_pil', 'id');
+        if(count($pilKecs) == 0){
+            Flash::warning('Tambahkan Sub Kecamatan untuk Kecamatan ini terlebih dahulu.');
+
+            return redirect(route('alternatifs.index'));
+        }
+        return view('alternatifs.create', compact('pilKecs'));
+    }
+
+    public function createSub($id)
+    {
+        $namaKec = Kecamatan::where('id', $id)->first(['nama_kec']);
+        $nama = $namaKec->nama_kec;
+        return view('alternatifs.createSub', compact('id', 'nama'));
+    }
+
     /**
      * Store a newly created Alternatif in storage.
      *
@@ -62,6 +81,11 @@ class AlternatifController extends AppBaseController
     public function store(CreateAlternatifRequest $request)
     {
         $input = $request->all();
+        $namaKecPil = DetailKecamatan::where('id', $request->nama)->first();
+        $nama = $namaKecPil->nama_kec_pil;
+
+        $input['kec_id'] = $input['nama'];
+        $input['nama'] = $nama;
 
         $alternatif = $this->alternatifRepository->create($input);
 

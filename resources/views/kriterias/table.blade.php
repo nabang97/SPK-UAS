@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Nama Kriteria</th>
+            <th>Keterangan</th>
             <th>Nilai Rata-rata</th>
             <th colspan="3">Action</th>
         </tr>
@@ -10,6 +11,7 @@
     @foreach($kriterias as $kriteria)
         <tr>
             <td>{!! $kriteria->nama_kriteria !!}</td>
+            <td>{!! $kriteria->ket !!}</td>
             <td>{!! $kriteria->rata_kriteria !!}</td>
             <td>
                 {!! Form::open(['route' => ['kriterias.destroy', $kriteria->id], 'method' => 'delete']) !!}
