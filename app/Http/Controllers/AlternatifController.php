@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAlternatifRequest;
 use App\Http\Requests\UpdateAlternatifRequest;
+use App\Kecamatan;
 use App\Models\Alternatif;
 use App\Models\NilaiAlternatifKriteria;
 use App\Models\NilaiKriteria;
@@ -35,9 +36,9 @@ class AlternatifController extends AppBaseController
     {
         $this->alternatifRepository->pushCriteria(new RequestCriteria($request));
         $alternatifs = $this->alternatifRepository->all();
+        $kecamatans = Kecamatan::all();
 
-        return view('alternatifs.index')
-            ->with('alternatifs', $alternatifs);
+        return view('alternatifs.index', compact('alternatifs', 'kecamatans'));
     }
 
     /**
@@ -47,7 +48,8 @@ class AlternatifController extends AppBaseController
      */
     public function create()
     {
-        return view('alternatifs.create');
+        $pilihKec = Kecamatan::all()->pluck('nama_kec', 'id');
+        return view('alternatifs.create', compact('pilihKec'));
     }
 
     /**

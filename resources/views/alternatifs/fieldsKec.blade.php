@@ -1,7 +1,3 @@
-<div class="form-group col-sm-6">
-    {!! Form::label('kec', 'Kecamatan:') !!}
-    {!! Form::select('kec_id', $pilihKec, null, ['class' => 'form-control']) !!}
-</div>
 <!-- Nama Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nama', 'Nama:') !!}

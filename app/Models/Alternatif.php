@@ -24,6 +24,7 @@ class Alternatif extends Model
 
 
     public $fillable = [
+        'kec_id',
         'nama',
         'nilai_akhir'
     ];
